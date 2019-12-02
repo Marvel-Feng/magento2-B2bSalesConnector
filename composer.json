@@ -1,0 +1,22 @@
+{
+    "name": "ace/module-b2borderconnector",
+    "description": "",
+    "type": "magento2-module",
+    "license": "proprietary",
+    "authors": [
+        {
+            "email": "info@mage2gen.com",
+            "name": "Mage2Gen"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {"ace/module-b2bconnector": "*"},
+    "autoload": {
+        "psr-4": {
+            "Ace\\B2bSalesConnector\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    }
+}

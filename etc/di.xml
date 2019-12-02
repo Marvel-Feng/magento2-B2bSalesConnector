@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- Start for order Sync -->
+    <virtualType name="OrderSyncLogger" type="Ace\B2bConnector\Model\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">acelogger</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="sync" xsi:type="object">OrderSyncLogHandler</item>
+            </argument>
+            <!--<argument name="name" xsi:type="string">import</argument>-->
+            <!--<argument name="handlers" xsi:type="array">-->
+                <!--<item name="import" xsi:type="object">OrderSyncLogHandler</item>-->
+            <!--</argument>-->
+        </arguments>
+    </virtualType>
+
+    <virtualType name="OrderSyncLogHandler" type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/sync_order.log</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Ace\B2bSalesConnector\Model\Mapper\Order">
+        <arguments>
+            <argument name="logger" xsi:type="object">OrderSyncLogger</argument>
+        </arguments>
+    </type>
+
+
+    <type name="Ace\B2bSalesConnector\Model\Sync\Order">
+        <arguments>
+            <argument name="logger" xsi:type="object">OrderSyncLogger</argument>
+            <argument name="mapper" xsi:type="object">Ace\B2bSalesConnector\Model\Mapper\Order</argument>-->
+        </arguments>
+    </type>
+
+    <virtualType name="SyncOrder" type="Ace\B2bConnector\Model\Sync">
+        <arguments>
+            <argument name="syncAdapter" xsi:type="object">Ace\B2bSalesConnector\Model\Sync\Order\Proxy</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Ace\B2bSalesConnector\Observer\Sales\OrderSaveAfter">
+        <arguments>
+            <argument name="sync" xsi:type="object">SyncOrder</argument>
+        </arguments>
+    </type>
+
+    <!-- End for order Sync -->
+</config>
