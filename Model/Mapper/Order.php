@@ -30,8 +30,15 @@ class Order extends MapperAbstract
      */
     public function map ($object)
     {
+        $returnArray = array();
+        $returnArray['status'] = $status = $object->getStatus();
+        $returnArray['order_date'] = $order_date = $object->getCreatedAt();
+        $returnArray['order_date'] = $order_date = date('Y-m-dH:i:s', strtotime( $order_date) );
+        $returnArray['tax_info'] = $tax_info = $object->getFullTaxInfo();
 
-        $this->logger->info("Ace\B2bSalesConnector\Model\Mapper\Order::map function");
+        return $returnArray;
+
+        //$this->logger->info("Ace\B2bSalesConnector\Model\Mapper\Order::map function");
 
     }
 

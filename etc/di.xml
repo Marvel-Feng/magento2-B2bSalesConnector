@@ -10,10 +10,7 @@
             <argument name="handlers" xsi:type="array">
                 <item name="sync" xsi:type="object">OrderSyncLogHandler</item>
             </argument>
-            <!--<argument name="name" xsi:type="string">import</argument>-->
-            <!--<argument name="handlers" xsi:type="array">-->
-                <!--<item name="import" xsi:type="object">OrderSyncLogHandler</item>-->
-            <!--</argument>-->
+
         </arguments>
     </virtualType>
 
@@ -33,7 +30,9 @@
     <type name="Ace\B2bSalesConnector\Model\Sync\Order">
         <arguments>
             <argument name="logger" xsi:type="object">OrderSyncLogger</argument>
-            <argument name="mapper" xsi:type="object">Ace\B2bSalesConnector\Model\Mapper\Order</argument>-->
+            <argument name="mapper" xsi:type="object">Ace\B2bSalesConnector\Model\Mapper\Order</argument>
+            <argument name="entityType" xsi:type="string">Magento\Sales\Model\Order::ENTITY</argument>
+
         </arguments>
     </type>
 
